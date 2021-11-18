@@ -24,22 +24,22 @@ public class PlayerScript : MonoBehaviour
         if (CameraControl.pause == false){
 
             // Movement
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.D))
             {
                 transform.Translate(Vector3.up * ms * Time.deltaTime);
             }   
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.A))
             {
                 transform.Translate(Vector3.down * ms * Time.deltaTime);
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                transform.Translate(Vector3.left * ms * Time.deltaTime);
+                transform.Translate(Vector3.left * (ms+20) * Time.deltaTime);
             }
 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.S))
             {
                 transform.Translate(Vector3.right * ms * Time.deltaTime);
             }
@@ -52,7 +52,7 @@ public class PlayerScript : MonoBehaviour
         viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + objectWidth, screenBounds.x - objectWidth);
         if((MainCamera.transform.position.y + screenBounds.y) >= transform.position.y)
         {
-            CameraControl.pause = true;
+            //CameraControl.pause = true;
         }
 
         transform.position = viewPos;
