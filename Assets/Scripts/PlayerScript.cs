@@ -12,7 +12,11 @@ public class PlayerScript : MonoBehaviour
     private float objectHeight;
 
     private SpriteRenderer mySpriteRenderer;
+    public Sprite spriteNormal;
     public Sprite spriteDead;
+    public Sprite spriteJump;
+    private bool jumping = false;
+    private float jumpTime;
 
     // Use this for initialization
     void Start () {
@@ -33,6 +37,8 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 transform.Translate(Vector3.up * ms * Time.deltaTime);
+                this.jumping = true;
+                mySpriteRenderer.sprite = spriteJump;
             }   
             if (Input.GetKey(KeyCode.S))
             {
@@ -47,6 +53,19 @@ public class PlayerScript : MonoBehaviour
             {
                 transform.Translate(Vector3.right * ms * Time.deltaTime);
                 mySpriteRenderer.flipX = true;
+            }
+
+            // Jumping
+            if (this.jumping == true)
+            {
+                this.jumpTime += Time.deltaTime;
+
+                if(this.jumpTime >= 0.5)
+                {
+                    this.jumping = false;
+                    this.jumpTime = 0f;
+                    mySpriteRenderer.sprite = spriteNormal;
+                }
             }
         }
     }

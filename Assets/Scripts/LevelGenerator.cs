@@ -7,6 +7,9 @@ public class LevelGenerator : MonoBehaviour
     private const float PLAYER_DISTANCE_SPAWN_LEVEL_PART = 10f;
 
     [SerializeField] private Transform levelPart_1;
+    [SerializeField] private Transform enemy_1;
+    [SerializeField] private Transform enemy_2;
+    [SerializeField] private Transform enemy_3;
     [SerializeField] private Transform levelPart_Start;
     [SerializeField] private Transform player;
 
@@ -16,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         lastEndPosition = levelPart_Start.Find("FinalPos").position;
-        int startingSpawnLevelParts = 5;
+        int startingSpawnLevelParts = 2;
         for (int i=0; i<startingSpawnLevelParts; i++)
         {
             SpawnLevelPart();
@@ -40,8 +43,32 @@ public class LevelGenerator : MonoBehaviour
     private Transform SpawnLevelPart(Vector3 spawnPosition)
     {
         Transform randomAux = levelPart_1;
-        spawnPosition = spawnPosition + new Vector3(NextFloat(-2, 2), NextFloat((float)-0.4,(float) 0.2));
+        spawnPosition = new Vector3(NextFloat(-2, 2), NextFloat((float)-0.7,(float) 0.5) + spawnPosition.y);
         Transform levelPartTransform = Instantiate(levelPart_1, spawnPosition, Quaternion.identity);
+
+        if(NextFloat(0, 3) < 1)
+        {
+            System.Random random = new System.Random();
+            int auxInt = random.Next(3);
+            Debug.Log(auxInt);
+            switch (auxInt)
+            {
+                case 0:
+                    spawnPosition = new Vector3(NextFloat(-4, 4), NextFloat((float)-0.7,(float) 0.5) + spawnPosition.y);
+                    Instantiate(enemy_1, spawnPosition, Quaternion.identity);
+                    break;
+                case 1:
+                    spawnPosition = new Vector3(NextFloat(-4, 4), NextFloat((float)-0.7,(float) 0.5) + spawnPosition.y);
+                    Instantiate(enemy_2, spawnPosition, Quaternion.identity);
+                    break;
+                default:
+                    spawnPosition = new Vector3(NextFloat(-4, 4), NextFloat((float)-0.7,(float) 0.5) + spawnPosition.y);
+                    Instantiate(enemy_3, spawnPosition, Quaternion.identity);
+                    break;
+            }
+
+        }
+
         return levelPartTransform;
     }
     

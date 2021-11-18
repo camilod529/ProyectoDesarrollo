@@ -27,7 +27,7 @@ public class CameraControl : MonoBehaviour
             {
                 // Camera
                 Vector3 newPos = new Vector3(transform.position.x, transform.position.y + speed, transform.position.z);
-                transform.position = Vector3.Lerp(transform.position, newPos, 0.08f);
+                transform.position = Vector3.Lerp(transform.position, newPos, 0.095f);
 
                 // Background
                 if(transform.position.y >= bg2.position.y)
