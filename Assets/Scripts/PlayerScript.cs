@@ -12,6 +12,7 @@ public class PlayerScript : MonoBehaviour
     private float objectHeight;
 
     private SpriteRenderer mySpriteRenderer;
+    public Sprite spriteDead;
 
     // Use this for initialization
     void Start () {
@@ -57,7 +58,7 @@ public class PlayerScript : MonoBehaviour
         if((MainCamera.transform.position.y + screenBounds.y) >= transform.position.y)
         {
             CameraControl.pause = true;
-
+            mySpriteRenderer.sprite = spriteDead;
         }
 
         transform.position = viewPos;
