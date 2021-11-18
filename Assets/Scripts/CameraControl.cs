@@ -15,7 +15,7 @@ public class CameraControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bgSize = bg1.GetComponent<BoxCollider2D>().size.y;
+        bgSize = 40.96f;
     }
 
     // Update is called once per frame
@@ -40,7 +40,6 @@ public class CameraControl : MonoBehaviour
         else
         {
             startInt = startInt + 1;
-            Debug.Log(startInt);
         }
     }
 

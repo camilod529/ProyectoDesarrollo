@@ -11,11 +11,16 @@ public class PlayerScript : MonoBehaviour
     private float objectWidth;
     private float objectHeight;
 
+    private SpriteRenderer mySpriteRenderer;
+
     // Use this for initialization
     void Start () {
         screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
         objectHeight = transform.GetComponent<SpriteRenderer>().bounds.extents.y;
+
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
     // Update is called once per frame
@@ -24,24 +29,23 @@ public class PlayerScript : MonoBehaviour
         if (CameraControl.pause == false){
 
             // Movement
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.W))
             {
                 transform.Translate(Vector3.up * ms * Time.deltaTime);
             }   
-
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.S))
             {
                 transform.Translate(Vector3.down * ms * Time.deltaTime);
             }
-
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKey(KeyCode.A))
             {
-                transform.Translate(Vector3.left * (ms+20) * Time.deltaTime);
+                transform.Translate(Vector3.left * ms * Time.deltaTime);
+                mySpriteRenderer.flipX = false;
             }
-
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.D))
             {
                 transform.Translate(Vector3.right * ms * Time.deltaTime);
+                mySpriteRenderer.flipX = true;
             }
         }
     }
@@ -52,7 +56,8 @@ public class PlayerScript : MonoBehaviour
         viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + objectWidth, screenBounds.x - objectWidth);
         if((MainCamera.transform.position.y + screenBounds.y) >= transform.position.y)
         {
-            //CameraControl.pause = true;
+            CameraControl.pause = true;
+
         }
 
         transform.position = viewPos;
