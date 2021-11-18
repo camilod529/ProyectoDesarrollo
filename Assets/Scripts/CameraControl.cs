@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    private float speed = 0.04f;
+    private float speed = 0.02f;
     public Transform bg1;
     public Transform bg2;
     private float bgSize;
@@ -27,7 +27,7 @@ public class CameraControl : MonoBehaviour
             {
                 // Camera
                 Vector3 newPos = new Vector3(transform.position.x, transform.position.y + speed, transform.position.z);
-                transform.position = Vector3.Lerp(transform.position, newPos, 0.2f);
+                transform.position = Vector3.Lerp(transform.position, newPos, 0.08f);
 
                 // Background
                 if(transform.position.y >= bg2.position.y)
