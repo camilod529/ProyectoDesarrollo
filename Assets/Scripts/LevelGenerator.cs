@@ -14,6 +14,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private Transform player;
 
     private Vector3 lastEndPosition;
+    private int auxInt;
 
     // Start is called before the first frame update
     void Start()
@@ -49,21 +50,23 @@ public class LevelGenerator : MonoBehaviour
         if(NextFloat(0, 3) < 1)
         {
             System.Random random = new System.Random();
-            int auxInt = random.Next(3);
-            Debug.Log(auxInt);
+            
             switch (auxInt)
             {
                 case 0:
-                    spawnPosition = new Vector3(NextFloat(-4, 4), NextFloat((float)-0.7,(float) 0.5) + spawnPosition.y);
+                    spawnPosition = new Vector3(NextFloat(-2, 2), NextFloat((float)-0.7,(float) 0.5) + spawnPosition.y);
                     Instantiate(enemy_1, spawnPosition, Quaternion.identity);
+                    auxInt = 1;
                     break;
                 case 1:
-                    spawnPosition = new Vector3(NextFloat(-4, 4), NextFloat((float)-0.7,(float) 0.5) + spawnPosition.y);
+                    spawnPosition = new Vector3(NextFloat(-2, 2), NextFloat((float)-0.7,(float) 0.5) + spawnPosition.y);
                     Instantiate(enemy_2, spawnPosition, Quaternion.identity);
+                    auxInt = 3;
                     break;
                 default:
-                    spawnPosition = new Vector3(NextFloat(-4, 4), NextFloat((float)-0.7,(float) 0.5) + spawnPosition.y);
+                    spawnPosition = new Vector3(NextFloat(-2, 2), NextFloat((float)-0.7,(float) 0.5) + spawnPosition.y);
                     Instantiate(enemy_3, spawnPosition, Quaternion.identity);
+                    auxInt = 0;
                     break;
             }
 

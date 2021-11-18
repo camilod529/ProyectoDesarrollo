@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraControl : MonoBehaviour
 {
@@ -34,6 +35,19 @@ public class CameraControl : MonoBehaviour
                 {
                     bg1.position = new Vector3(bg1.position.x, bg2.position.y+ bgSize, bg1.position.z);
                     SwitchBg();
+                }
+            }
+            else
+            {
+                if(startInt > 3500)
+                {
+                    startInt = 0;
+                    pause = false;
+                    SceneManager.LoadScene("Juego");
+                }
+                else
+                {
+                    startInt = startInt + 1;
                 }
             }
         }
